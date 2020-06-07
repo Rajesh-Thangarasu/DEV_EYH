@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+          <app-update-events></app-update-events>
+    </div>
+    <div class="col-sm-9">
+     
+<div class="container">
+    <h3 style="margin-left: -16px;">{{title}}</h3>
+    <div class="row contribution-table" *ngIf="isPaymentTableLoaded;">
+        <p>Note: All currency values represented in INR (Indian Rupees).</p>
+        <div class="year-heading" style=""><span>{{contribution['year']}}</span></div>
+        <table style="padding: 5px;">
+            <tr>
+                <th class="v-txt">Name</th>
+                <th class="v-txt">Jan</th>
+                <th class="v-txt">Feb</th>
+                <th class="v-txt">Mar</th>
+                <th class="v-txt">April</th>
+                <th class="v-txt">May</th>
+                <th class="v-txt">June</th>
+                <th class="v-txt">July</th>
+                <th class="v-txt">Aug</th>
+                <th class="v-txt">Sep</th>
+                <th class="v-txt">Oct</th>
+                <th class="v-txt">Nov</th>
+                <th class="v-txt">Dec</th>
+                <th class="v-txt">Total</th>
+            </tr>
+            <tr *ngFor="let p of contribution['payments']; let i = index;">
+                <td>{{p.name}}</td>
+                <td>{{p.months.jan}}</td>
+                <td>{{p.months.feb}}</td>
+                <td>{{p.months.mar}}</td>
+                <td>{{p.months.apr}}</td>
+                <td>{{p.months.may}}</td>
+                <td>{{p.months.jun}}</td>
+                <td>{{p.months.jul}}</td>
+                <td>{{p.months.aug}}</td>
+                <td>{{p.months.sep}}</td>
+                <td>{{p.months.oct}}</td>
+                <td>{{p.months.nov}}</td>
+                <td>{{p.months.dec}}</td>
+                <td>{{p.total}}</td>
+            </tr>
+            <tr>
+                <td colspan="13">Total</td>
+                
+                <td>{{contribution['sumTotal']}}</td>
+        </table>
+    </div>
+</div>
+    </div></div></div>

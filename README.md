@@ -1,2 +1,2 @@
-# DEV_EYH
-EYH DEVELOPEMENT
+# EYH
+ExpandYourHands

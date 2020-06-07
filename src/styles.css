@@ -1,0 +1,211 @@
+/* Add application styles & imports to this file! */
+@import "ag-grid-community/dist/styles/ag-grid.css";
+@import "ag-grid-community/dist/styles/ag-theme-alpine.css";
+
+
+/* You can add global styles to this file, and also import other style files */
+
+.container{
+
+        border-right-color: black;
+        border-right-width: thin;
+        border-right-style: dotted;
+        border-left-color: black;
+        border-left-width: thin;
+        border-left-style: dotted;
+        border-top: unset;
+        border-bottom: unset;
+}
+
+.bc-white{
+    color: white !important;
+}
+
+.bc-gray{
+    color:#25282a !important;
+}
+
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem.ui-state-active {
+    background-color: #f4f4f4 !important;
+    border: 1px solid #c8c8c8 !important;
+}
+
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem:hover {
+    background-color: #00af66 !important;
+    border: 1px solid #00af66 !important; 
+}
+
+body .ui-tabmenu .ui-tabmenu-nav .ui-tabmenuitem:hover > a{
+    color: white !important;
+}
+
+body .ui-tabmenu .ui-tabmenu-nav {
+    border-bottom: unset !important; 
+}
+
+.bc-green{
+    background: #00af66 !important;
+    color: #00af66 !important;
+}
+
+.logo-img{
+    border-radius: 50% !important;
+    width:3%;
+}
+
+.user-img{
+    border-radius: 20% !important;
+    width:7%;
+    margin-right:1%;
+}
+
+.login-form{
+    /* width:40%; */
+}
+
+.txt-bold{
+    font-weight: bold !important;
+}
+
+.card {
+    margin:1% !important;
+}
+
+.eyh-home-bg {
+    /* opacity: 0.2; */
+    filter: alpha(opacity=30); /* For IE8 and earlier */
+    background-image: url("./assets/eyh-logo.png");
+    background-color: whitesmoke;
+    /* height: 600px; */
+    background-position: center;
+    background-repeat: repeat-y;
+    background-size: cover;
+    position: relative;
+    min-height: 700px;
+  }
+
+  .eyh-home-bg:before{ content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.6);
+
+  }
+
+.bc-lightWhite {
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.eyh-home-text {
+    padding: 5% 10% 5% 10%;
+    -ms-transform: translate(0%, 0%); /* IE 9 */
+    -webkit-transform: translate(0%, 0%); /* Safari prior 9.0 */
+    transform: translate(0%, 0%);
+    margin-bottom: 1rem; 
+    color: #25282a;
+   
+  }
+
+  .hide-tab {
+      display: none;
+  }
+
+  .active-tab {
+      display: block;
+  }
+
+  /* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }
+
+  /*Home page Changes*/
+@media screen and (max-width:767px) { 
+    .carousel#demo {
+	/* margin-bottom: 4rem; */
+}
+
+.row .eyh-home-text {
+    margin-bottom: 1rem; 
+}
+
+/*What we do page*/
+.card-group .card {
+	max-width: 100% !important;
+}
+
+/*Reach us*/
+.jumbotron.contact-txt .container h1 {
+	font-size: 24px;
+	text-decoration: underline;
+}
+
+.jumbotron.contact-txt {
+	background: #fff;
+}
+
+.jumbotron.contact-txt p {
+	margin-bottom: .5rem;
+	line-height: 24px;
+}
+
+}
+
+/*--------------------------------------*/
+
+table > tr:first-child {
+    background-color: #00af66 !important;
+    color: white !important;
+    height:45px;
+}
+
+table > tr > td {
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+table > tr > th {
+    padding-left: 2%;
+}
+
+table > tr:not(:first-child) {
+ color: #25282a;   
+}
+
+table > tr:nth-child(even) {
+    background: #f7f5f5;
+}
+
+table > tr:nth-child(odd) {
+    background: #FFF;
+}
+
+/*--------------------------------------*/
+.btn-color{
+    background: #00af66 !important;
+    border-color: #00af66 !important;
+}
+.refresh-btn,.refresh-btn:hover{
+    margin-left: 1%;
+    margin-bottom: 0%;
+    color: white;
+    background-color: #00af66;
+    padding: 1px 6px !important;
+}
