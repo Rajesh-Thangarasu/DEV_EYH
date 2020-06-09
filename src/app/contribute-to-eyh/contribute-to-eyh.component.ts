@@ -56,9 +56,14 @@ export class ContributeToEYHComponent implements OnInit {
     {field: 'name',checkboxSelection: true, headerCheckboxSelection: true,sortable: true,filter:true },
     {field: 'month',width:100},
     {field:'Totalamount',width:150,sortable: true,filter:true},
-    {field: 'amount',width:120,editable:true,filter:true},
+    {field: 'amount',width:120,editable:true,filter:true,singleClickEdit:true},
     {field: 'updatedBy',sortable: true,filter:true},
-    {field: 'note',width:400,editable:true,sortable: true,filter:true}
+    {field: 'note',width:200,editable:true,singleClickEdit:true,cellEditor: 'agLargeTextCellEditor',
+    cellEditorParams: {
+        maxLength: '500',   // override the editor defaults
+        cols: '80',
+        rows: '8'
+    }}
   ]
   
 //-----------End---------------------------------------------
@@ -131,7 +136,7 @@ export class ContributeToEYHComponent implements OnInit {
         "userId": new FormControl("/eyh-users/"+ user.id),
         "year": new FormControl(formatDate(new Date(), 'yyyy', 'en-US', '+0530')),
         "updatedBy": new FormControl(this.socialusers.email),
-        "note": new FormControl(note),
+        "note": new FormControl(''),
         "name": new FormControl(user['name']),
       }
     );
@@ -154,8 +159,6 @@ export class ContributeToEYHComponent implements OnInit {
         console.log(d)
         totAmount = d.map(p => parseInt(p['amount'])).reduce((a,b) => a + b, 0);
         console.log("total",totAmount)
-        note=d.map(p=>p['note'])
-        console.log("note",note)
         fg = this.createPayment(u, totAmount,note);
         formArray.push(fg);
         this.contributionForm.setControl('payment', formArray);
@@ -208,6 +211,7 @@ export class ContributeToEYHComponent implements OnInit {
       const selectedRow = this.gridApi.getSelectedRows();
       let msg1="Please select atleast one row for update"
       let msg2=selectedRow.length+"row are selectd for update"
+      let msg3="Plese enter the amount to update"
       console.log(selectedRow)
       if(selectedRow.length==0)
       {
@@ -216,11 +220,14 @@ export class ContributeToEYHComponent implements OnInit {
       }
       else if(selectedRow.length>=1)
       {
-        selectedRow.forEach((s,index)=>{
-          console.log(s["amount"])
-          console.log(index)
-        })
-        this.addconfirm(msg2,selectedRow)
+        let d = selectedRow.filter(p => p['amount'] === 0);
+        if(d.length>=1){
+          this.errorMsg(msg3)
+        }
+        else{
+          this.addconfirm(msg2,selectedRow)
+        }
+        
       }
      
     }
@@ -288,20 +295,26 @@ export class ContributeToEYHComponent implements OnInit {
 
   deletePayments($event: any, payment: Payment) {
     console.log('Deleting the payment id => '+payment.id);
-    this.paymentshandlerService.deletePayments(payment.id.toString()).then( _ => {
-      alert('Deleted the payment id => '+payment.id);
-      console.log(this.selectedValue)
-      if(this.selectedValue)
-      {
-        this.changeUser(event)
+    this.confirmationService.confirm({
+      message:'Deleting the payment id => '+payment.id,
+      accept: () => {
+        this.paymentshandlerService.deletePayments(payment.id.toString()).then( _ => {
+          this.successMsg('Deleted the payment id => '+payment.id);
+          console.log(this.selectedValue)
+          if(this.selectedValue)
+          {
+            this.changeUser(event)
+          }
+          else
+          {
+            this.getReloadData()
+          }
+        }, errorCode => {
+          console.log(errorCode);
+        });
       }
-      else
-      {
-        this.getReloadData()
-      }
-    }, errorCode => {
-      console.log(errorCode);
-    });
+    })
+   
  }
 // List Payment code block
 changeUser(event:any){
@@ -325,5 +338,24 @@ getReloadData(){
   }).subscribe(data => {
     this.listPayments = this.paymentshandlerService.paymentMapper(data);
   })
+}
+deleteAllPayments(){
+  let d;
+  this.paymentshandlerService.getPayments().subscribe(data => {
+    d = this.paymentshandlerService.paymentMapper(data);
+    console.log(d)
+    d.map((p,index) => {
+      parseInt(p['amount'])
+      this.paymentshandlerService.deletePayments(p['id']).then( _ => {
+        console.log("deleted"+p['id'])
+        if(d.length==index+1)
+        {
+          this.successMsg("all payements deleted")
+          this.getReloadData()
+        }
+    
+      })
+    })
+ })
 }
 }

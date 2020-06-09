@@ -53,7 +53,12 @@ export class ManageDonationComponent implements OnInit {
     }
     addDonationColumnDefs = [
       {field: 'donatedDate', checkboxSelection: true, headerCheckboxSelection: true,editable:true,sortable: true,filter:true },
-      {field: 'donatedTo',width:300,editable:true,sortable: true,filter:true},
+      {field: 'donatedTo',width:300,editable:true,sortable: true,filter:true,singleClickEdit:true,cellEditor: 'agLargeTextCellEditor',
+      cellEditorParams: {
+          maxLength: '500',   // override the editor defaults
+          cols: '80',
+          rows: '8'
+      }},
       {field: 'spendAmount',editable:true,sortable: true,filter:true},
       {field: 'fundReleasedBy',sortable: true,filter:true},
       {field: 'fundRequestedBy',editable:true,sortable: true,filter:true},

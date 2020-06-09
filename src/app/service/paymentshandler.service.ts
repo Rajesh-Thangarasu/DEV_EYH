@@ -77,7 +77,25 @@ export class PaymentshandlerService {
       take(1)
     );     
   }
-
+  getEyhUsers(emailId:any,role:any) {
+    if(role=="eyh-admin")
+    {
+      return this.firestore.collection('eyh-users').snapshotChanges().pipe(
+        tap(arr => console.log(`read ${arr.length} docs.`)),
+        take(1)
+      );     
+    }
+    else
+    {
+      return this.firestore.collection('eyh-users',
+      ref => ref
+      .where('emailId', '==',emailId)
+      ).snapshotChanges().pipe(
+        tap(arr => console.log(`read ${arr.length} docs.`)),
+        take(1)
+      );
+    }
+  }
   getUser(emailId: any) {
     let eyhUser: EyhUser;
     this.getUsers().subscribe(data => {

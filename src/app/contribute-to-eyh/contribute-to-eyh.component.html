@@ -13,21 +13,25 @@
                         {{item.label}}
                     </ng-template>
                 </p-tabMenu>
-                <div for="List-Payments" class="col-sm-5 form-group row div-toggel-view hide-tab">
+                <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+                <div for="List-Payments" class="col-sm-4 form-group row div-toggel-view hide-tab">
                   <select class="form-control"  [(ngModel)]="selectedValue" name="users" rows="1"(change)="changeUser($event)">
-                    <option Value="choose" disabled>Choose the user</option>
+                    <option [ngValue]=" " disabled>Choose the user</option>
                     <option *ngFor="let user of eyhUsers" [ngValue]="user.emailId">{{user.name}}</option>
                   </select>
                 </div>
                 <div for="List-Payments" class="col-sm-2 form-group row div-toggel-view hide-tab">
                   <button (click)="getReloadData()" class="btn refresh-btn"><i class="pi pi-replay" style="font-size: 2em"></i></button>
                 </div>
+                <div for="List-Payments" class="col-sm-1 form-group row div-toggel-view hide-tab">
+                  <button (click)="deleteAllPayments()" class="btn del-btn"><i class="pi pi-trash" style="font-size: 1em"></i></button>
+                </div>
             </div>
             <p-toast position="top-right"></p-toast>
         <div class="row">
                 <div for="Add-Contribution" class="row div-toggel-view hide-tab" >
                 <!--Modified by Rajesh T-->
-                <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+              
                 <p-dialog position="top-left" [(visible)]="display" [style]="{width: '30vw'}" >
                     <p-header>
                         Warning!
@@ -51,7 +55,8 @@
         </div>
         
         <div class="row">
-            <div for="List-Payments" class="row div-toggel-view hide-tab" style="overflow-y: scroll; height: 450px; width:100%;" >  
+            <div for="List-Payments" class="row div-toggel-view hide-tab" style="overflow-y: scroll; height: 450px; width:100%;" >
+              <!-- <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
             <table class="list-payment-table">
                 <tr>
                   <th>Update</th>
